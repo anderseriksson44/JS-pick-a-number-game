@@ -1,0 +1,131 @@
+<!doctype HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Javascript tests
+        </title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body>
+        
+        <main style="width:100%; height:auto; overflow:auto;">
+        
+            <div style="width:50%; margin:20px auto; padding:20px 40px; background-color:#f8f7f6; height:auto; overflow:auto;">
+                <h4 id="header">
+                    Välj ett nummer mellan 1 och 10 och tryck "Kör"!
+                </h4>
+                
+                <input type="text" id="userChoice" name="userChoice" value="" class="form-control">
+                <div style="margin:10px 0; text-align:center;">
+                    <input type="button" id="button" name="button" value="Kör" onclick="mittSpel()" class="btn btn-submit">
+                </div>
+                
+                
+                <h5 id="msg"></h5>
+                <h5 id="stats"></h5>
+                
+                <script>
+                    
+                    //for counting the function's calls
+                    var myFuncCalls = 0;
+                    
+                    //for counting the right answers
+                    var rightAnswers = 0;
+                    
+                    //the main function
+                    function mittSpel(){
+                        
+                        //var to control the do/while loop
+                        var userChoiceF;
+                        
+                        //the player's answer casted to number
+                        var answer = Number(document.getElementById("userChoice").value);
+                        
+                        //test console logs
+                        console.log(answer);
+                        console.log(typeof(answer)); 
+                        
+                        //test variable
+                        //var correct_answer = 5;
+                        
+                        //select variables
+                        var msg = document.getElementById("msg");
+                        var stats = document.getElementById("stats");
+                        
+                        //cumputer's choice
+                        var correct_answer = Math.floor(Math.random() * 10) +1;
+                        console.log(correct_answer);
+                
+                //wraps the statements in one main validation statement, the entry must be an integer***
+                if(!isNaN(answer)){
+                     
+                    //limits the entry between 1 and 10
+                    if(answer<1 || answer>10){
+                        msg.innerHTML = "Välj endast ett nummer mellan 1 och 10.";
+                        msg.style.color='red';
+                    }
+
+                    else if(answer === correct_answer){
+                        msg.innerHTML = "Rätt nummer är " + correct_answer + ". Du gissade rätt!";
+                        msg.style.color='green'; 
+                        
+                        //increment for the right answers
+                        rightAnswers++;
+                        
+                        alert("Wow, du van!!! Rätt nummer är " + correct_answer + ".");
+                        
+                        //this loop will run at least once and will continue run as long as the user doesn't fulfil the terms
+                        do{  
+                        //
+                        var userChoice = prompt("Vill du fortsätta spella? Svara Ja eller Nej.").toUpperCase();
+                        
+                        //validates the user's choice to Ja or NEJ
+                        if(userChoice != "JA" && userChoice != "NEJ"){
+                           alert("Du skrev fell svar. Ange endast Ja eller Nej.");
+                        }
+                        
+                        //if the answer is JA, the loop breaks and the user may continue playing
+                        else if(userChoice == "JA"){
+                            break;
+                        }
+                        
+                        //if the answer is NEJ, the loop breaks and the stats show up
+                        else{
+                            
+                            //win rates var, limited in two float digits
+                            var winRate = Number(rightAnswers / (myFuncCalls + 1) * 100).toFixed(2);
+                            alert("Tack för spelet!! Vi ses nästa gång!!!!");
+                            
+                            stats.innerHTML = "Du har spelat " + (myFuncCalls + 1) + (myFuncCalls=0 ? " omgång" : " omgånger") + " och vunnit " + rightAnswers + "." + "<br>" + "Din vinstrang är " + winRate + "% !";
+                            break;  
+                        }
+
+                       }while(userChoiceF = true);
+                                            
+                    }
+
+                    else{
+                        msg.innerHTML = "Rätt nummer är " + correct_answer + ". Du gissade fel. Försök igen!";
+                        msg.style.color='red';
+                        //increment for the wrong answers. The function calls is +1, because on right answers, this does not increase
+                        myFuncCalls++;
+                    }
+            }
+                        
+            //***the entry must be an integer          
+            else{
+                msg.innerHTML = "Välj endast siffervärde";
+                msg.style.color='red';
+            }
+                       
+        }
+        </script>
+        
+                
+            </div>
+        </main>
+    </body>
+</html>
+                    
+                   

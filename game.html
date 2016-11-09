@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<title>Gamet</title>
+<head>
+	<meta charset="utf-8">
+	<title>Game</title>
+</head>
+<body>
+    <h1>This is a game</h1>
+    <p>Clean up! Vad kan förbättras i koden i övrigt</p>
+	<p>Version 2: vill du spela igen? (ska spelet ta fram ett nytt rätt svar eller köra på samma igen?)</p>
+	<p>Version 3: användaren väljer tal att gissa mellan</p>
+	<p>Version 4: kombinera #2 och #3</p>
+	<p>Version 5: lagra alla rätta svar och gissningar samt visa statistik på det</p>
+	<p>Version 6: lagra alla rätta svar, gissningar och intervall samt visa statistik på det</p>
+
+    <script type="text/javascript">
+        
+//användaren får en popup med en fråga
+//gissa ett tal mellan 1 och 10
+//om använ daren gissar rätt så visa det
+
+        var guess;
+        var slumptal = function(){
+            
+            var randomNum = Math.floor(Math.random()*10+1);
+            console.log("randomNum:" +randomNum);
+            return randomNum;
+             }
+        
+        var gissa = function () {
+            var spela = false;
+            var gissning = parseInt(window.prompt("Gissa ett tal mellan 1-10"));
+            console.log(gissning);
+            
+            if (gissning === correctNum){
+                console.log("Rätt");
+                guess=true;           // variable used in while statement. 
+                console.log("guessOk är:" + guess)
+                
+            }
+            else
+                {
+                console.log("Fel");
+                guess=false;
+                var nyrunda=false;
+                console.log("guessOk är:" + guess)
+                }
+        return guess;    
+        }
+        
+       //Ask if you want to play at all
+        
+        var spela = window.confirm("Want to play a game?");
+        
+        if (spela == true){                                                       
+            var correctNum = slumptal();
+            console.log("Slumptalet är:"+correctNum);
+            var gissaNum = gissa();
+            console.log("gissning: " +gissaNum)                                     //Just print the guess
+                
+            do {
+                var nyrunda = window.confirm("Vill du spela igen?");
+                if (nyrunda == true){
+                    var correctNum = slumptal();
+                    console.log("Slumptalet är:"+correctNum);
+                    var gissaNum = gissa();
+                    console.log("gissning: " +gissaNum);
+                    while (guess != true) {
+                        console.log("Fel! Gissa igen! Du gissade: " +gissaNum);
+                        gissa();
+                    }
+                    console.log("Grattis")  // Congtrats to your win if correct answer
+                }
+            }
+            while (nyrunda == true);
+            console.log("Tack för idag")  // Congtrats to your win if correct answer
+            }
+        else
+        console.log("Då slutar vi"); // In case you dont want to play at all.
+            
+        
+
+            
+//            while (guess != true) {                                                  //
+//            console.log("Fel! Gissa igen! Du gissade: " +gissaNum);
+//            gissa();
+//            }
+//            var nyrunda = window.confirm("Vill du gissa igen?");
+//                if (nyrunda == true){
+//                    gissa();
+//                    while (guess != true) {
+//                        console.log("Fel! Gissa igen! Du gissade: " +gissaNum);
+//                        gissa();
+//            
+//                    }
+//                    
+//                else {
+//                    gissaNum = true;
+//                    console.log("avsluta");
+//                }
+//            
+//                console.log("Grattis");  // Congtrats to your win if correct answer
+//            
+//            
+//            }
+//        else
+//            console.log("Då slutar vi"); // In case you dont want to play at all.
+                      
+          
+        
+        
+        
+//            var newnumber = window.confirm("Vill du ha nytt slumptal?");
+//                    if (newnumber== true);{
+//                            console.log ("the new numer is: " + slumptal());
+//                        } 
+//                        else; {
+
+        
+        
+        
+////            
+//        
+//    //check if you want to play at all
+//        var spela = window.confirm("Vill du spela ett spel")
+//        if (spela == true){ 
+//                while (nyrunda && gissa()==false ) {               //while loop too check if you want to play more. If "nyrunda" is true and no correct answer is given , call for function "gissa"        
+//                    console.log("guessOk:" + gissa());
+//                    gissa(); 
+//                    var nyrunda = window.confirm("Vill du spela igen?");
+//                    console.log("nyrunda:" +nyrunda);
+//                }
+//                console.log("Inte spela mer nehej..")
+//        } 
+//        else 
+//            console.log("tack o hej");
+//        
+//   
+        
+
+  </script>
+    
+</body>
+</html>
+
+
